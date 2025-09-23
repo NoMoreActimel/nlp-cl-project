@@ -23,7 +23,9 @@
             "split": "train",
             "shuffle": true,
             "shuffle_seed": 52,
-            "max_length": 1024
+            "max_length": 1024,
+            "model_name": "google/t5-base",
+            "filter_max_length": true
           }
         }
       ]
@@ -42,7 +44,9 @@
             "split": "validation",
             "shuffle": true,
             "shuffle_seed": 52,
-            "max_length": 1024
+            "max_length": 1024,
+            "model_name": "google/t5-base",
+            "filter_max_length": true
           }
         }
       ]
@@ -61,7 +65,9 @@
             "split": "test",
             "shuffle": true,
             "shuffle_seed": 52,
-            "max_length": 1024
+            "max_length": 1024,
+            "model_name": "google/t5-base",
+            "filter_max_length": true
           }
         }
       ]
