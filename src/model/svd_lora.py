@@ -1,6 +1,6 @@
 import torch
 from torch import nn
-from transformers.modeling_utils import Conv1D
+# from transformers.modeling_utils import Conv1D
 
 
 class SVDLoRA(nn.Module):
@@ -27,10 +27,11 @@ class SVDLoRA(nn.Module):
         if isinstance(orig_module, nn.Linear):
             self.in_features = orig_module.in_features
             self.out_features = orig_module.out_features
-        elif isinstance(orig_module, Conv1D):
-            # For Conv1D, weight is (in_features, out_features)
-            self.in_features = orig_module.weight.shape[0]
-            self.out_features = orig_module.weight.shape[1]
+        elif isinstance(orig_module, nn.Conv1d):
+            # For nn.Conv1d, weight is (out_channels, in_channels, kernel_size)
+            # For kernel_size=1, this is equivalent to Linear(in_channels, out_channels)
+            self.in_features = orig_module.weight.shape[1]  # in_channels
+            self.out_features = orig_module.weight.shape[0]  # out_channels
         else:
             raise TypeError(f"SVDLoRA is not supported for module of type {type(orig_module)}")
 

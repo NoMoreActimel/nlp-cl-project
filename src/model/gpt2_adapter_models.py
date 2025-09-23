@@ -1,4 +1,5 @@
-from transformers.modeling_utils import Conv1D
+# from transformers.modeling_utils import Conv1D
+from torch import nn
 
 from src.model.lora_model_base import LoRAModelBase
 from src.model.lora_sequential_model_base import LoRASequentialModelBase
@@ -14,7 +15,7 @@ class GPT2LoRA(GPT2forGeneration, LoRAModelBase):
         self.init_lora(lora_config, **cfg)
         
     def check_module(self, name, module):
-        return isinstance(module, Conv1D) and name.split('.')[-1] in self.lora_config['target_layers']
+        return isinstance(module, nn.Conv1d) and name.split('.')[-1] in self.lora_config['target_layers']
 
 
 class GPT2LoRASequential(GPT2forGeneration, LoRASequentialModelBase):
@@ -23,7 +24,7 @@ class GPT2LoRASequential(GPT2forGeneration, LoRASequentialModelBase):
         self.init_lora_sequential(lora_config, **cfg)
 
     def check_module(self, name, module):
-        return isinstance(module, Conv1D) and name.split('.')[-1] in self.lora_config['target_layers']
+        return isinstance(module, nn.Conv1d) and name.split('.')[-1] in self.lora_config['target_layers']
 
 
 class GPT2SVDLoRA(GPT2forGeneration, SVDLoRAModelBase):
@@ -32,7 +33,7 @@ class GPT2SVDLoRA(GPT2forGeneration, SVDLoRAModelBase):
         self.init_svd_lora(svd_lora_config, **cfg)
 
     def check_module(self, name, module):
-        return isinstance(module, Conv1D) and name.split('.')[-1] in self.lora_config['target_layers']
+        return isinstance(module, nn.Conv1d) and name.split('.')[-1] in self.lora_config['target_layers']
 
 
 class GPT2SVDLoRASequential(GPT2forGeneration, SVDLoRASequentialModelBase):
@@ -41,7 +42,7 @@ class GPT2SVDLoRASequential(GPT2forGeneration, SVDLoRASequentialModelBase):
         self.init_svd_lora_sequential(svd_lora_config, **cfg)
 
     def check_module(self, name, module):
-        return isinstance(module, Conv1D) and name.split('.')[-1] in self.lora_config['target_layers']
+        return isinstance(module, nn.Conv1d) and name.split('.')[-1] in self.lora_config['target_layers']
 
 
 class GPT2IgnoreTopK(GPT2forGeneration, IgnoreTopKModelBase):
