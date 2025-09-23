@@ -1,0 +1,22 @@
+{
+    "model": {
+      "type": "T5LoRA",
+      "args": {
+        "t5_config": {
+          "model_name": "google/t5-base",
+          "cache_dir": "cache/",
+          "max_length": 1024,
+          "max_new_tokens": 256
+        },
+        "lora_config": {
+          "rank": 4, 
+          "alpha": 16, 
+          "dropout_p": 0.1,
+          "target_layers": ["q", "k", "v", "o", "wi", "wo"]
+        }
+      }
+    },
+    "trainer": {
+      "wandb_run_name": "T5 Single LoRA 5e bs2+ga4"
+    }
+  }

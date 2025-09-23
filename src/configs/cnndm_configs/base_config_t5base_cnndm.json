@@ -1,0 +1,61 @@
+{
+    "name": "T5_CL_summarization",
+    "n_gpu": 1,
+    "preprocessing": {},
+    "model": {
+        "type": "T5forSummarization",
+        "args": {
+          "model_name": "google/t5-base",
+          "cache_dir": "cache/",
+          "max_length": 1024,
+          "max_new_tokens": 256
+        }
+    },
+    "optimizer": {
+      "type": "AdamW",
+      "args": {
+        "lr": 5e-4,
+        "betas": [0.9, 0.95],
+        "weight_decay": 1e-5
+      }
+    },
+    "metrics": [
+      {
+          "type": "ExactMatch_CNNDMMetric",
+          "args": {"name": "Exact-Match"}
+      },
+      {
+          "type": "F1_CNNDMMetric",
+          "args": {"name": "F1"}
+      },
+      {
+          "type": "Rouge_CNNDMMetric",
+          "args": {"name": "Average-ROUGE"}
+      }
+    ],
+    "lr_scheduler": {
+      "type": "ExponentialLR",
+      "args": {
+        "gamma": 1.0
+      }
+    },
+    "loss": {
+      "type": "CrossEntropyLoss",
+      "args": {}
+    },
+    "trainer": {
+      "epochs": 35,
+      "eval_frequency": 1,
+      "first_epoch_eval_only": true,
+      "grad_norm_clip": 100.0,
+      "grad_accum_steps": 4,
+      "mixed_precision": "no",
+      "save_dir": "saved/",
+      "save_period": 60,
+      "verbosity": 2,
+      "monitor": "min loss",
+      "visualize": "wandb",
+      "wandb_project": "nlp-cl-project",
+      "wandb_run_name": "[CNNDM] T5 5e bs2+ga4"
+    }
+  }

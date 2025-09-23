@@ -112,6 +112,9 @@ class T5forSummarization(nn.Module):
 
 
     def ids_to_clean_text(self, generated_ids):
+        generated_ids = generated_ids.clone()
+        generated_ids[generated_ids == -100] = self.tokenizer.pad_token_id
+
         gen_text = self.tokenizer.batch_decode(
             generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False
         )

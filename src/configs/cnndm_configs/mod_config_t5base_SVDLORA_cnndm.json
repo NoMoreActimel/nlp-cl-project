@@ -1,0 +1,24 @@
+{
+    "model": {
+      "type": "T5SVDLoRA",
+      "args": {
+        "t5_config": {
+          "model_name": "google/t5-base",
+          "cache_dir": "cache/",
+          "max_length": 1024,
+          "max_new_tokens": 256
+        },
+          "svd_lora_config": {
+            "rank": 4,
+            "reinit_lora": false,
+            "reinit_std": 1.0,
+            "reinit_use_qr": true,
+            "target_layers": ["q", "k", "v", "o", "wi", "wo"]
+          }
+      }
+    },
+    "trainer": {
+      "wandb_run_name": "T5 Single SVDLoRA 5e bs2+ga4"
+    }
+  }
+  

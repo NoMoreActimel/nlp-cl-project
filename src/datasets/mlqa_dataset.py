@@ -124,14 +124,14 @@ class MLQAHuggingFaceDataset(TorchDataset):
             context = self._pad_punctuation(sample["context"])
             question = self._pad_punctuation(sample["question"])
             inputs = self._string_join(['question:', question, 'context:', context, 'answer:'])
-            labels = self._pad_punctuation(sample["answers"]["text"][0])
+            labels = [self._pad_punctuation(label) for label in sample["answers"]["text"]]
 
             item = {"text": inputs, "answer": labels, "lang": self.lang}
             if self.model_type == "enc-dec":
                 item["input"] = inputs
-                item["target"] = labels
+                item["target"] = labels[0]
             else:
-                full_text = inputs + labels
+                full_text = inputs + labels[0]
                 item["input"] = full_text
                 item["target"] = full_text
             items.append(item)

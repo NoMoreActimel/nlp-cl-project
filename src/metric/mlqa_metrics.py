@@ -34,7 +34,7 @@ class ExactMatch_MLQAMetric(BaseMetric):
             predictions = [pred.split("answer:")[-1].strip() for pred in predictions]
         
         if self.use_mt5_code:
-            return mt5_mlqa_em(answers, predictions)
+            return mt5_mlqa_em(answers, predictions, langs[0])
         return self._orig_mlqa_em(predictions, answers, langs)
 
 class F1_MLQAMetric(BaseMetric):
@@ -65,8 +65,11 @@ class F1_MLQAMetric(BaseMetric):
 
         if self.model_type == "dec":
             # answers = [ans.split("answer:")[-1].strip() for ans in answers]
-            predictions = [pred.split("answer:")[-1].strip() for pred in predictions]
+            predictions = [
+                [pred.split("answer:")[-1].strip() for pred in sample_preds]
+                for sample_preds in predictions
+            ]
         
         if self.use_mt5_code:
-            return mt5_mlqa_f1(answers, predictions)
+            return mt5_mlqa_f1(answers, predictions, langs[0])
         return self._orig_mlqa_f1(predictions, answers, langs)
