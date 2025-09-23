@@ -24,7 +24,7 @@
             "shuffle": true,
             "shuffle_seed": 52,
             "max_length": 1024,
-            "model_name": "google/t5-base",
+            "model_name": "google-t5/t5-base",
             "filter_max_length": true
           }
         }
@@ -32,7 +32,7 @@
     },
     "val_CNNDM": {
       "batch_size": 2, "num_workers": 5, "max_length": 1024,
-      "tokenizer_name": ["T5Tokenizer", "google/t5-base"],
+      "tokenizer_name": ["T5Tokenizer", "google-t5/t5-base"],
       "use_mixed_dataset": false,
       "datasets": [
         {
@@ -45,7 +45,7 @@
             "shuffle": true,
             "shuffle_seed": 52,
             "max_length": 1024,
-            "model_name": "google/t5-base",
+            "model_name": "google-t5/t5-base",
             "filter_max_length": true
           }
         }
@@ -53,7 +53,7 @@
     },
     "test_CNNDM": {
       "batch_size": 2, "num_workers": 5, "max_length": 1024,
-      "tokenizer_name": ["T5Tokenizer", "google/t5-base"],
+      "tokenizer_name": ["T5Tokenizer", "google-t5/t5-base"],
       "use_mixed_dataset": false,
       "datasets": [
         {
@@ -66,7 +66,7 @@
             "shuffle": true,
             "shuffle_seed": 52,
             "max_length": 1024,
-            "model_name": "google/t5-base",
+            "model_name": "google-t5/t5-base",
             "filter_max_length": true
           }
         }
@@ -74,7 +74,7 @@
     },
     "val_C4": {
       "batch_size": 32, "num_workers": 5, "max_length": 256,
-      "tokenizer_name": ["T5Tokenizer", "google/t5-base"],
+      "tokenizer_name": ["T5Tokenizer", "google-t5/t5-base"],
       "use_mixed_dataset": false,
       "t5_mlm_masking": true,
       "datasets": [

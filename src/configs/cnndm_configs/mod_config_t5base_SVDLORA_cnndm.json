@@ -3,7 +3,7 @@
       "type": "T5SVDLoRA",
       "args": {
         "t5_config": {
-          "model_name": "google/t5-base",
+          "model_name": "google-t5/t5-base",
           "cache_dir": "cache/",
           "max_length": 1024,
           "max_new_tokens": 256
